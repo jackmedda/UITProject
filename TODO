@@ -1,5 +1,9 @@
 Task TO DO:
 
 [JackMedda]
-
+Homepage:
+    - Finire la creazione del DifficultySlider
+#Note
+Aggiunto il CDN di bootstrap e react-bootstrap con npm install react-bootstrap bootstrap e
+cambiato il nome delle cartelle come quelle del progetto di esempio di flux
 [Tamo]

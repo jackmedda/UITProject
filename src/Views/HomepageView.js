@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import Image from 'react-bootstrap/Image'
 
 function HomepageView (props) {
   return (
@@ -13,8 +14,11 @@ function HomepageView (props) {
 }
 
 function Header () {
-
+  return (
+    <Image src="../../public/Title.png" fluid />
+  )
 }
+
 
 function Main () {
 

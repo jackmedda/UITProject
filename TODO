@@ -2,8 +2,12 @@ Task TO DO:
 
 [JackMedda]
 Homepage:
-    - Finire la creazione del DifficultySlider
+    - Finire la creazione del DifficultySliderStore (Sembra fatta bene xD)
+    - Fare lo startButton
+    - Mettere a posto il container
+    - Mettere a posto la view così che si possa provare
 #Note
-Aggiunto il CDN di bootstrap e react-bootstrap con npm install react-bootstrap bootstrap e
-cambiato il nome delle cartelle come quelle del progetto di esempio di flux
+Nel commit c'è un nuovo file riguardo allo stile di codice, in questo modo dovremmo scrivere allo stesso modo,
+per qualsiasi cosa segui cosa dice la libreria ESLint quando ti segna gli errori
 [Tamo]
+Non pushare workspace.xml, è diverso da te e me, quindi incasina il push ogni volta ahahahah

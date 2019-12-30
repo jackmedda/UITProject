@@ -20,7 +20,7 @@ function Header () {
 }
 
 function Main () {
-
+  return null;
 }
 
 function Footer () {
@@ -31,6 +31,15 @@ function Footer () {
   )
 }
 
-function DifficultySlider () {
+function DifficultySlider (props) {
+  var difficulty = props.difficultySlider;
 
+  return (
+    <div className="slidecontainer">
+      <input type="range" min="1" max="3" value={difficulty} className="slider" id="myRange">
+      </input>
+    </div>
+  )
 }
+
+export default HomepageView

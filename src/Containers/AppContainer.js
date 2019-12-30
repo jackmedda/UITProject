@@ -1,6 +1,6 @@
 'use strict'
 
-import AppView from '../views/AppView'
+import HomepageView from '../Views/HomepageView'
 import { Container } from 'flux/utils'
 import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'
 import Actions from '../Data/HomepageData/HomepageActions'
@@ -13,6 +13,7 @@ function getStores () {
 
 function getState () {
   return {
+    difficultySlider: DifficultySliderStore.getState(),
     /*
     draft: TodoDraftStore.getState(),
     editing: TodoEditStore.getState(),
@@ -32,4 +33,4 @@ function getState () {
   }
 }
 
-export default Container.createFunctional(AppView, getStores, getState)
+export default Container.createFunctional(HomepageView, getStores, getState)

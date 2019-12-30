@@ -32,4 +32,4 @@ class DifficultySliderStore extends ReduceStore {
   }
 }
 
-export default DifficultySliderStore
+export default { DifficultySliderStore, difficultyTypes }

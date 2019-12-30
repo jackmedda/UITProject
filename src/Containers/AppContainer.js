@@ -1,8 +1,9 @@
-'use strict';
+'use strict'
 
-import AppView from '../views/AppView';
-import { Container } from 'flux/utils';
-import DifficultySliderStore from '../Data/HomePageData/DifficultySliderStore'
+import AppView from '../views/AppView'
+import { Container } from 'flux/utils'
+import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'
+import Actions from '../Data/HomepageData/HomepageActions'
 
 function getStores () {
   return [
@@ -12,6 +13,7 @@ function getStores () {
 
 function getState () {
   return {
+    /*
     draft: TodoDraftStore.getState(),
     editing: TodoEditStore.getState(),
     todos: TodoStore.getState(),
@@ -25,6 +27,8 @@ function getState () {
     onToggleAllTodos: TodoActions.toggleAllTodos,
     onToggleTodo: TodoActions.toggleTodo,
     onUpdateDraft: TodoActions.updateDraft
+    */
+    onChangeDifficulty: Actions.changeDifficulty
   }
 }
 

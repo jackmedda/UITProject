@@ -1,5 +1,3 @@
-'use strict'
-
 import React from 'react'
 import Image from 'react-bootstrap/Image'
 
@@ -13,30 +11,37 @@ function HomepageView (props) {
   )
 }
 
-function Header () {
+function Header (props) {
   return (
     <Image src="../../public/Title.png" fluid />
   )
 }
 
-function Main () {
-  return null;
+function Main (props) {
+  return null
 }
 
-function Footer () {
+function Footer (props) {
   return (
     <footer id="footer">
-      <DifficultySlider/>
+      <DifficultySlider {...props}/>
     </footer>
   )
 }
 
 function DifficultySlider (props) {
-  var difficulty = props.difficultySlider;
+  const difficulty = props.difficultySlider
+  const onChange = (event) => props.onChangeDifficulty(event.target.value)
 
   return (
-    <div className="slidecontainer">
-      <input type="range" min="1" max="3" value={difficulty} className="slider" id="myRange">
+    <div className="slidercontainer">
+      <input
+        type="range"
+        min="1"
+        max="3"
+        value={difficulty}
+        onChange={onChange}
+        className="slider">
       </input>
     </div>
   )

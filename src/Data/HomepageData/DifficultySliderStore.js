@@ -1,12 +1,10 @@
-'use strict'
-
 import { ReduceStore } from 'flux/utils'
 import TwoAnswerDispatcher from '../TwoAnswerDispatcher'
 
-export const difficultyTypes = {
-  EASY: 'EASY',
-  NORMAL: 'NORMAL',
-  HARD: 'HARD'
+const difficultyTypes = {
+  EASY: 1,
+  NORMAL: 2,
+  HARD: 3
 }
 
 class DifficultySliderStore extends ReduceStore {
@@ -21,13 +19,16 @@ class DifficultySliderStore extends ReduceStore {
   reduce (state, action) {
     switch (action.type) {
       case difficultyTypes.EASY:
-        return state.set(difficultyTypes.EASY)
+        return difficultyTypes.EASY
 
       case difficultyTypes.NORMAL:
-        return state.set(difficultyTypes.NORMAL)
+        return difficultyTypes.NORMAL
 
       case difficultyTypes.HARD:
-        return state.set(difficultyTypes.HARD)
+        return difficultyTypes.HARD
+
+      default:
+        return state
     }
   }
 }

@@ -1,5 +1,3 @@
-'use strict'
-
 import HomepageView from '../Views/HomepageView'
 import { Container } from 'flux/utils'
 import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'

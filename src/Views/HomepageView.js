@@ -1,5 +1,9 @@
 import React from 'react'
 import Image from 'react-bootstrap/Image'
+import Button from 'react-bootstrap/Button'
+import Title from '../Miscellaneous/Title.png'
+import routes from '../routes'
+import { navigate, useRoutes, usePath } from 'hookrouter'
 
 function HomepageView (props) {
   return (
@@ -13,12 +17,19 @@ function HomepageView (props) {
 
 function Header (props) {
   return (
-    <Image src="../../public/Title.png" fluid />
+    <Image src={Title} fluid />
   )
 }
 
 function Main (props) {
-  return null
+  const route = useRoutes(routes)
+
+  return (
+    <div id="main">
+      <Button variant="primary" onClick={ () => { navigate('/nameSelect') } }>Start!</Button>
+      {usePath() === '/' ? '' : route}
+    </div>
+  )
 }
 
 function Footer (props) {

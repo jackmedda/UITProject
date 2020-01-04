@@ -1,9 +1,8 @@
 import React from 'react'
-import Image from 'react-bootstrap/Image'
-import Button from 'react-bootstrap/Button'
+import Button from '@material-ui/core/Button'
 import Title from '../Miscellaneous/Title.png'
 import routes from '../routes'
-import { navigate, useRoutes, usePath } from 'hookrouter'
+import { navigate, useRoutes } from 'hookrouter'
 
 function HomepageView (props) {
   return (
@@ -17,17 +16,20 @@ function HomepageView (props) {
 
 function Header (props) {
   return (
-    <Image src={Title} fluid />
+    <img src={Title}/>
   )
 }
 
 function Main (props) {
+  routes['/'] = ''
   const route = useRoutes(routes)
 
   return (
     <div id="main">
-      <Button variant="primary" onClick={ () => { navigate('/nameSelect') } }>Start!</Button>
-      {usePath() === '/' ? '' : route}
+      <Button variant="contained" color="primary" onClick={ () => { navigate('/nameSelect') } }>
+        Start!
+      </Button>
+      {route}
     </div>
   )
 }

@@ -1,6 +1,9 @@
 import { ReduceStore } from 'flux/utils'
 import TwoAnswerDispatcher from '../TwoAnswerDispatcher'
 import PlayerActionTypes from './PlayerActionTypes'
+import Immutable from 'immutable'
+import Player from './Player'
+import Counter from '../../Counter'
 
 class PlayerStore extends ReduceStore {
   constructor () {
@@ -8,13 +11,22 @@ class PlayerStore extends ReduceStore {
   }
 
   getInitialState () {
-    return []
+    return Immutable.OrderedMap()
   }
 
   reduce (state, action) {
     switch (action.type) {
-      case PlayerActionTypes.STOP_EDITING_NAME:
-        return state.concat([action.name])
+      case PlayerActionTypes.ADD_PLAYER: {
+        const id = Counter.increment()
+        return state.set(id, new Player({
+          id,
+          name: action.name,
+          score: 0
+        }))
+      }
+      case PlayerActionTypes.CHANGED_NAME:
+        console.log('here')
+        return state.setIn([action.id, 'name'], action.name)
 
       default:
         return state

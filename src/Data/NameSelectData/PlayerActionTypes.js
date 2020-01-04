@@ -1,5 +1,6 @@
 const PlayerActionTypes = {
-  STOP_EDITING_NAME: 'STOP_EDITING_NAME'
+  ADD_PLAYER: 'ADD_PLAYER',
+  CHANGED_NAME: 'CHANGED_NAME'
 }
 
 export default PlayerActionTypes

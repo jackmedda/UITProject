@@ -11,8 +11,9 @@ function getStores () {
 
 function getState () {
   return {
-    players: PlayerStore.getInitialState(),
+    players: PlayerStore.getState(),
 
+    onNewPlayer: Actions.newPlayer,
     onSubmitName: Actions.submitName
   }
 }

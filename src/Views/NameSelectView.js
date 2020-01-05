@@ -10,18 +10,12 @@ import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 
 function NameSelectView (props) {
-
   return (
     <div>
-      <Header {...props} />
       <Main {...props} />
       <Footer {...props} />
     </div>
   )
-}
-
-function Header (props) {
-  return null
 }
 
 function Main (props) {

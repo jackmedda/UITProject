@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import HomepageContainer from './Containers/HomepageContainer'
+import App from './App'
 
-ReactDOM.render(<HomepageContainer />, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))

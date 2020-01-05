@@ -1,10 +1,10 @@
 import { ReduceStore } from 'flux/utils'
 import TwoAnswerDispatcher from '../TwoAnswerDispatcher'
 
-const difficultyTypes = {
-  EASY: 1,
-  NORMAL: 2,
-  HARD: 3
+export const difficultyTypes = {
+  EASY: 'EASY',
+  NORMAL: 'NORMAL',
+  HARD: 'HARD'
 }
 
 class DifficultySliderStore extends ReduceStore {

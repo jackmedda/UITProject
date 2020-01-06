@@ -3,7 +3,7 @@ import TwoAnswerDispatcher from '../TwoAnswerDispatcher'
 import PlayerActionTypes from './PlayerActionTypes'
 import Immutable from 'immutable'
 import Player from './Player'
-import Counter from '../../Counter'
+import Counter from '../Counter'
 
 class PlayerStore extends ReduceStore {
   constructor () {

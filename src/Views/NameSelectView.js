@@ -11,10 +11,10 @@ import { makeStyles } from '@material-ui/core/styles'
 
 function NameSelectView (props) {
   return (
-    <div>
+    <Container maxWidth="md">
       <Main {...props} />
       <Footer {...props} />
-    </div>
+    </Container>
   )
 }
 

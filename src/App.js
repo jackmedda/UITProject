@@ -1,23 +1,15 @@
 import React from 'react'
-import Title from './Miscellaneous/Title.png'
+import Container from '@material-ui/core/Container'
 import routes from './routes'
 import { useRoutes } from 'hookrouter'
-import { Container } from '@material-ui/core'
 
 function App (props) {
   const routeResult = useRoutes(routes)
 
   return (
-    <Container>
-      <Header/>
+    <Container fluid>
       {routeResult}
     </Container>
-  )
-}
-
-function Header () {
-  return (
-    <img alt="Title" src={Title}/>
   )
 }
 

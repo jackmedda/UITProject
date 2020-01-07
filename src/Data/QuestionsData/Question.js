@@ -8,7 +8,7 @@ const Answer = Immutable.Record({
 const Question = Immutable.Record({
   text: '',
   answers: [Answer, Answer, Answer],
-  answered: false
+  skipped: false
 })
 
 export default Question

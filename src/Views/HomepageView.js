@@ -102,7 +102,7 @@ function HomepageDrawer (props) {
         open={props.openDrawerData.globalScore}
         TransitionComponent={Transition}
         keepMounted
-        onClose={props.onOpenGlobalScore(false)}
+        onClose={props.onOpenDrawerItem('globalScore', false)}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
       >
@@ -123,11 +123,11 @@ function HomepageDrawer (props) {
     <div
       className={classes.list}
       role="presentation"
-      onClick={() => { props.onOpenDrawer(false) }}
-      onKeyDown={(event) => { if (event.key !== 'Tab' && event.key !== 'Shift') props.onOpenDrawer(false) }}
+      onClick={() => { props.onOpenDrawerItem('drawer', false) }}
+      onKeyDown={(event) => { if (event.key !== 'Tab' && event.key !== 'Shift') props.onOpenDrawerItem('drawer', false) }}
     >
       <List>
-        <ListItem button onClick={ () => { return globalScore } }>
+        <ListItem button onClick={props.onOpenDrawerItem('globalScore', true)}>
           <ListItemIcon><EmojiEvents/></ListItemIcon>
           <ListItemText primary='Global Score' />
         </ListItem>
@@ -153,13 +153,13 @@ function HomepageDrawer (props) {
       <IconButton
         color="inherit"
         aria-label="open drawer"
-        onClick={() => { props.onOpenDrawer(true) }}
+        onClick={() => { props.onOpenDrawerItem('drawer', true) }}
         edge="end"
         className={clsx(props.openDrawerData.drawer && classes.hide)}
       >
         <MenuIcon />
       </IconButton>
-      <Drawer anchor="right" open={props.openDrawerData.drawer} onClose={() => { props.onOpenDrawer(false) }}>
+      <Drawer anchor="right" open={props.openDrawerData.drawer} onClose={() => { props.onOpenDrawerItem('drawer', false) }}>
         {sideList}
       </Drawer>
     </div>
@@ -196,11 +196,7 @@ DifficultySlider.propTypes = {
 
 HomepageDrawer.propTypes = {
   openDrawerData: PropTypes.objectOf(PropTypes.bool),
-  onOpenDrawer: PropTypes.func,
-  onOpenGlobalScore: PropTypes.func,
-  onOpenWhats2Answer: PropTypes.func,
-  onOpenTeam: PropTypes.func,
-  onOpenContacts: PropTypes.func
+  onOpenDrawerItem: PropTypes.func
 }
 
 export default HomepageView

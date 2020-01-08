@@ -17,11 +17,7 @@ function getState () {
     openDrawerData: DrawerStore.getState(),
 
     onChangeDifficulty: Actions.changeDifficulty,
-    onOpenDrawer: Actions.openDrawer,
-    onOpenGlobalScore: Actions.openGlobalScore,
-    onOpenWhats2Answer: Actions.openWhats2Answer,
-    onOpenTeam: Actions.openTeam,
-    onOpenContacts: Actions.openContacts
+    onOpenDrawerItem: Actions.openDrawerItem
   }
 }
 

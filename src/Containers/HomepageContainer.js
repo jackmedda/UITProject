@@ -1,19 +1,23 @@
 import HomepageView from '../Views/HomepageView'
 import { Container } from 'flux/utils'
 import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'
+import OpenDrawerStore from '../Data/HomepageData/OpenDrawerStore'
 import Actions from '../Data/HomepageData/HomepageActions'
 
 function getStores () {
   return [
-    DifficultySliderStore
+    DifficultySliderStore,
+    OpenDrawerStore
   ]
 }
 
 function getState () {
   return {
     difficultySlider: DifficultySliderStore.getState(),
+    open: OpenDrawerStore.getState(),
 
-    onChangeDifficulty: Actions.changeDifficulty
+    onChangeDifficulty: Actions.changeDifficulty,
+    onOpenDrawer: Actions.openDrawer
   }
 }
 

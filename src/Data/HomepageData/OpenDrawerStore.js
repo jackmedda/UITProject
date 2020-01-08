@@ -2,25 +2,19 @@ import { ReduceStore } from 'flux/utils'
 import TwoAnswerDispatcher from '../TwoAnswerDispatcher'
 import HomepageActionTypes from './HomepageActionTypes'
 
-export const difficultyTypes = {
-  EASY: 'EASY',
-  NORMAL: 'NORMAL',
-  HARD: 'HARD'
-}
-
-class DifficultySliderStore extends ReduceStore {
+class OpenDrawerStore extends ReduceStore {
   constructor () {
     super(TwoAnswerDispatcher)
   }
 
   getInitialState () {
-    return difficultyTypes.NORMAL
+    return false
   }
 
   reduce (state, action) {
     switch (action.type) {
-      case HomepageActionTypes.CHANGE_DIFFICULTY:
-        return action.difficulty
+      case HomepageActionTypes.OPEN_CLOSE_DRAWER:
+        return action.state
 
       default:
         return state
@@ -28,4 +22,4 @@ class DifficultySliderStore extends ReduceStore {
   }
 }
 
-export default new DifficultySliderStore()
+export default new OpenDrawerStore()

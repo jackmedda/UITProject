@@ -21,16 +21,23 @@ import EmojiEvents from '@material-ui/icons/EmojiEvents'
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset'
 import Mail from '@material-ui/icons/Mail'
 import People from '@material-ui/icons/People'
+import Slide from '@material-ui/core/Slide'
 import clsx from 'clsx'
 import { makeStyles } from '@material-ui/core'
 import { navigate } from 'hookrouter'
 import Title from '../Miscellaneous/Title.png'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Dialog from '@material-ui/core/Dialog'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogActions from '@material-ui/core/DialogActions'
 
 function HomepageView (props) {
   return (
     <Container>
       <Header {...props}/>
       <Main />
+      <DifficultySlider {...props}/>
       <Footer {...props} />
     </Container>
   )
@@ -58,7 +65,7 @@ function Main () {
 function Footer (props) {
   return (
     <footer id="footer">
-      <DifficultySlider {...props}/>
+      Copyright
     </footer>
   )
 }
@@ -85,6 +92,33 @@ function DifficultySlider (props) {
 function HomepageDrawer (props) {
   const classes = useStyles()
 
+  const Transition = React.forwardRef(function Transition (props, ref) {
+    return <Slide direction="up" ref={ref} {...props} />
+  })
+
+  const globalScore = (
+    <div>
+      <Dialog
+        open={props.openDrawerData.globalScore}
+        TransitionComponent={Transition}
+        keepMounted
+        onClose={props.onOpenGlobalScore(false)}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title" classes={classes.globalScoreText}>Global Score</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+            Let Google help apps determine location. This means sending anonymous location data to
+            Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        </DialogActions>
+      </Dialog>
+    </div>
+  )
+
   const sideList = (
     <div
       className={classes.list}
@@ -93,7 +127,7 @@ function HomepageDrawer (props) {
       onKeyDown={(event) => { if (event.key !== 'Tab' && event.key !== 'Shift') props.onOpenDrawer(false) }}
     >
       <List>
-        <ListItem button>
+        <ListItem button onClick={ () => { return globalScore } }>
           <ListItemIcon><EmojiEvents/></ListItemIcon>
           <ListItemText primary='Global Score' />
         </ListItem>
@@ -121,11 +155,11 @@ function HomepageDrawer (props) {
         aria-label="open drawer"
         onClick={() => { props.onOpenDrawer(true) }}
         edge="end"
-        className={clsx(props.open && classes.hide)}
+        className={clsx(props.openDrawerData.drawer && classes.hide)}
       >
         <MenuIcon />
       </IconButton>
-      <Drawer anchor="right" open={props.open} onClose={() => { props.onOpenDrawer(false) }}>
+      <Drawer anchor="right" open={props.openDrawerData.drawer} onClose={() => { props.onOpenDrawer(false) }}>
         {sideList}
       </Drawer>
     </div>
@@ -141,14 +175,17 @@ const useStyles = makeStyles(theme => ({
   },
   menuButton: {
     position: 'absolute',
-    top: '1%',
-    right: '2%'
+    top: theme.spacing(1),
+    right: theme.spacing(2)
   },
   list: {
     width: 250
   },
   hide: {
     display: 'none'
+  },
+  globalScoreText: {
+    'text-align': 'center'
   }
 }))
 
@@ -158,8 +195,12 @@ DifficultySlider.propTypes = {
 }
 
 HomepageDrawer.propTypes = {
-  open: PropTypes.bool,
-  onOpenDrawer: PropTypes.func
+  openDrawerData: PropTypes.objectOf(PropTypes.bool),
+  onOpenDrawer: PropTypes.func,
+  onOpenGlobalScore: PropTypes.func,
+  onOpenWhats2Answer: PropTypes.func,
+  onOpenTeam: PropTypes.func,
+  onOpenContacts: PropTypes.func
 }
 
 export default HomepageView

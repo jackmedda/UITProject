@@ -13,6 +13,30 @@ const Actions = {
       type: HomepageActionTypes.OPEN_CLOSE_DRAWER,
       state: isOpen
     })
+  },
+  openGlobalScore (isOpen) {
+    TwoAnswerDispatcher.dispatch({
+      type: HomepageActionTypes.OPEN_GLOBAL_SCORE,
+      state: isOpen
+    })
+  },
+  openWhats2Answer (isOpen) {
+    TwoAnswerDispatcher.dispatch({
+      type: HomepageActionTypes.OPEN_WHATS_2ANSWER,
+      state: isOpen
+    })
+  },
+  openTeam (isOpen) {
+    TwoAnswerDispatcher.dispatch({
+      type: HomepageActionTypes.OPEN_TEAM,
+      state: isOpen
+    })
+  },
+  openContacts (isOpen) {
+    TwoAnswerDispatcher.dispatch({
+      type: HomepageActionTypes.OPEN_CONTACTS,
+      state: isOpen
+    })
   }
 }
 

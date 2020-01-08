@@ -1,23 +1,27 @@
 import HomepageView from '../Views/HomepageView'
 import { Container } from 'flux/utils'
 import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'
-import OpenDrawerStore from '../Data/HomepageData/OpenDrawerStore'
+import DrawerStore from '../Data/HomepageData/DrawerStore'
 import Actions from '../Data/HomepageData/HomepageActions'
 
 function getStores () {
   return [
     DifficultySliderStore,
-    OpenDrawerStore
+    DrawerStore
   ]
 }
 
 function getState () {
   return {
     difficultySlider: DifficultySliderStore.getState(),
-    open: OpenDrawerStore.getState(),
+    openDrawerData: DrawerStore.getState(),
 
     onChangeDifficulty: Actions.changeDifficulty,
-    onOpenDrawer: Actions.openDrawer
+    onOpenDrawer: Actions.openDrawer,
+    onOpenGlobalScore: Actions.openGlobalScore,
+    onOpenWhats2Answer: Actions.openWhats2Answer,
+    onOpenTeam: Actions.openTeam,
+    onOpenContacts: Actions.openContacts
   }
 }
 

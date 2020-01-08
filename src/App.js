@@ -7,7 +7,7 @@ function App (props) {
   const routeResult = useRoutes(routes)
 
   return (
-    <Container fluid>
+    <Container>
       {routeResult}
     </Container>
   )

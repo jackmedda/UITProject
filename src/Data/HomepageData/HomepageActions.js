@@ -14,6 +14,18 @@ const Actions = {
       item: item,
       state: isOpen
     })
+  },
+  editContactUs (email, message) {
+    TwoAnswerDispatcher.dispatch({
+      type: HomepageActionTypes.EDIT_CONTACT_US,
+      email: email,
+      message: message
+    })
+  },
+  submitContactUs () {
+    TwoAnswerDispatcher.dispatch({
+      type: HomepageActionTypes.SUBMIT_CONTACT_US
+    })
   }
 }
 

@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions'
 import TextField from '@material-ui/core/TextField'
 import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
+import Immutable from 'immutable'
 
 function NameSelectView (props) {
   return (
@@ -99,12 +100,12 @@ const useStyles = makeStyles(theme => ({
 }))
 
 Main.propTypes = {
-  players: PropTypes.arrayOf(PropTypes.object),
+  players: PropTypes.instanceOf(Immutable.OrderedMap),
   onSubmitName: PropTypes.func
 }
 
 Player.propTypes = {
-  player: PropTypes.object,
+  player: PropTypes.instanceOf(Immutable.Record),
   onSubmitName: PropTypes.func
 }
 

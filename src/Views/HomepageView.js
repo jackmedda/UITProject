@@ -32,6 +32,7 @@ import clsx from 'clsx'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import { navigate } from 'hookrouter'
 import Title from '../Miscellaneous/Title.png'
+import Immutable from 'immutable'
 
 function HomepageView (props) {
   return (
@@ -101,13 +102,13 @@ function HomepageDrawer (props) {
   const globalScore = (
     <div>
       <Dialog
-        open={props.openDrawerData.globalScore}
+        open={props.openDrawerData.get('globalScore')}
         TransitionComponent={Transition}
         keepMounted
         onClose={(event) => { props.onOpenDrawerItem('globalScore', false) }}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-        className={clsx(!props.openDrawerData.globalScore && classes.hide)}
+        className={clsx(!props.openDrawerData.get('globalScore') && classes.hide)}
       >
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">Global Score</DialogTitle>
@@ -128,13 +129,13 @@ function HomepageDrawer (props) {
   const whats2Answer = (
     <div>
       <Dialog
-        open={props.openDrawerData.whats2Answer}
+        open={props.openDrawerData.get('whats2Answer')}
         TransitionComponent={Transition}
         keepMounted
         onClose={(event) => { props.onOpenDrawerItem('whats2Answer', false) }}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-        className={clsx(!props.openDrawerData.whats2Answer && classes.hide)}
+        className={clsx(!props.openDrawerData.get('whats2Answer') && classes.hide)}
       >
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">What&apos;s 2Answer?</DialogTitle>
@@ -155,13 +156,13 @@ function HomepageDrawer (props) {
   const team = (
     <div>
       <Dialog
-        open={props.openDrawerData.team}
+        open={props.openDrawerData.get('team')}
         TransitionComponent={Transition}
         keepMounted
         onClose={(event) => { props.onOpenDrawerItem('team', false) }}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-        className={clsx(!props.openDrawerData.team && classes.hide)}
+        className={clsx(!props.openDrawerData.get('team') && classes.hide)}
       >
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">Team</DialogTitle>
@@ -182,26 +183,35 @@ function HomepageDrawer (props) {
   const contacts = (
     <div>
       <Dialog
-        open={props.openDrawerData.contacts}
-        TransitionComponent={Transition}
+        open={props.openDrawerData.get('contacts')}
         keepMounted
         onClose={(event) => { props.onOpenDrawerItem('contacts', false) }}
         aria-labelledby="alert-dialog-slide-title"
         aria-describedby="alert-dialog-slide-description"
-        className={clsx(!props.openDrawerData.contacts && classes.hide)}
+        className={clsx(!props.openDrawerData.get('contacts') && classes.hide)}
       >
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">Contact Us</DialogTitle>
+          <DialogContent>
+            <form id="contents_form" action="javascript:0">
+              <TextField id="contacts_email" autoFocus={true} fullWidth margin="dense"
+                type="email" label="Email" variant="outlined"
+                value={props.contactUs.get('email')}
+                onChange={(event) => { props.onChangeContactUs(event.target.value, props.contactUs.get('message')) }}
+              />
+              <TextField id="contacts_message" fullWidth
+                type="text" label="Message" variant="outlined" multiline={true}
+                value={props.contactUs.get('message')}
+                onChange={(event) => { props.onChangeContactUs(props.contactUs.get('email'), event.target.value) }}
+              />
+            </form>
+          </DialogContent>
         </ThemeProvider>
         <DialogActions>
-          <ThemeProvider theme={theme}>
-            <form autoComplete="off">
-              <TextField id="contacts_email"
-                type="email" name="email" label="Email" variant="outlined" classname={classes.contactsEmail} />
-              <TextField id="contacts_message"
-                type="text" name="message" label="Message" variant="outlined" multiline={true} />
-            </form>
-          </ThemeProvider>
+          <Button type="submit" form="contents_form" value="Submit"
+            onClick={(event) => { props.onSubmitContactUs() }} color="primary">
+            Submit
+          </Button>
         </DialogActions>
       </Dialog>
     </div>
@@ -271,14 +281,15 @@ function HomepageDrawer (props) {
 
 const theme = createMuiTheme({
   overrides: {
-    MuiTextField: {
-      root: {
-        display: 'block'
-      }
-    },
     MuiDialogTitle: {
       root: {
         'text-align': 'center'
+      }
+    },
+    MuiInputLabel: {
+      root: {
+        'background-color': 'white',
+        padding: '0 5px'
       }
     }
   }
@@ -310,8 +321,11 @@ DifficultySlider.propTypes = {
 }
 
 HomepageDrawer.propTypes = {
-  openDrawerData: PropTypes.objectOf(PropTypes.object),
-  onOpenDrawerItem: PropTypes.func
+  openDrawerData: PropTypes.instanceOf(Immutable.Record),
+  onOpenDrawerItem: PropTypes.func,
+  contactUs: PropTypes.instanceOf(Immutable.Record),
+  onChangeContactUs: PropTypes.func,
+  onSubmitContactUs: PropTypes.func
 }
 
 export default HomepageView

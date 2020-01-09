@@ -2,10 +2,13 @@ Task TO DO:
 
 [JackMedda]
 Homepage:
-    - Finire la creazione del DifficultySliderStore (Sembra fatta bene xD)
-    - Fare lo startButton
-    - Mettere a posto il container
-    - Mettere a posto la view così che si possa provare
+   - Ottenere i dati dal form nel list item del drawer 'Contact us' tramite l'attributo 'name'
+     Mettere una dimensione più grande per i text field dello stesso list item
+   - Creare i dialog ad-hoc per gli altri list item
+   - #BIGGER_WORK: finire la terza view delle domande e risposte
+            le Questions sono un set così che siano tutte diverse:
+            > il campo skipped permette di non dare le stesse domande all'utente (una volta date tutte si setta a false)
+            > il campo correct delle Answer dice solo quale risposta è corretta per la domanda selezionata
 #Note
 Nel commit c'è un nuovo file riguardo allo stile di codice, in questo modo dovremmo scrivere allo stesso modo,
 per qualsiasi cosa segui cosa dice la libreria ESLint quando ti segna gli errori

@@ -20,13 +20,15 @@ class PlayerStore extends ReduceStore {
         const id = Counter.increment()
         return state.set(id, new Player({
           id,
-          name: action.name,
+          name: '',
           score: 0
         }))
       }
-      case PlayerActionTypes.CHANGED_NAME:
-        console.log('here')
+      case PlayerActionTypes.CHANGE_NAME:
         return state.setIn([action.id, 'name'], action.name)
+
+      case PlayerActionTypes.UPDATE_SCORE:
+        return state.setIn([action.id, 'score'], action.score)
 
       default:
         return state

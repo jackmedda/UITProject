@@ -14,7 +14,8 @@ function getState () {
     players: PlayerStore.getState(),
 
     onNewPlayer: Actions.newPlayer,
-    onSubmitName: Actions.submitName
+    onSubmitName: Actions.submitName,
+    onUpdateScore: Actions.updateScore
   }
 }
 

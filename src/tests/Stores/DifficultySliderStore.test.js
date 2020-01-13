@@ -1,5 +1,5 @@
-import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'
-import HomepageActionTypes from '../Data/HomepageData/HomepageActionTypes'
+import DifficultySliderStore from '../../Data/HomepageData/DifficultySliderStore'
+import HomepageActionTypes from '../../Data/HomepageData/HomepageActionTypes'
 
 const difficultyTypes = {
   EASY: 'EASY',

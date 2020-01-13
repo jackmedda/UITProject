@@ -1,5 +1,3 @@
-'use strict'
-
 import DifficultySliderStore from '../Data/HomepageData/DifficultySliderStore'
 import HomepageActionTypes from '../Data/HomepageData/HomepageActionTypes'
 
@@ -19,7 +17,7 @@ describe('DifficultySliderStore', () => {
     }
   })
 
-  ///// Begin tests /////
+  /// Begin tests ///
 
   it('can change difficulty', () => {
     expect(state).toEqual(difficultyTypes.NORMAL)

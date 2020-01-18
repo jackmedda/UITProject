@@ -1,7 +1,9 @@
 import { ReduceStore } from 'flux/utils'
 import TwoAnswerDispatcher from '../TwoAnswerDispatcher'
-import Question from './Question'
 import Immutable from 'immutable'
+import shuffle from '../shuffle'
+import Question, { Answer } from './Question'
+import questions from '../../questions.json'
 
 class QuestionStore extends ReduceStore {
   constructor () {
@@ -9,7 +11,15 @@ class QuestionStore extends ReduceStore {
   }
 
   getInitialState () {
-    return Immutable.Set()
+    return Immutable.Set(shuffle(questions.map(question =>
+      Question({
+        text: question.text,
+        answers: question.answers.map(answer => Answer({
+          text: answer.text,
+          correct: answer.correct
+        })),
+        skipped: question.skipped
+      }))))
   }
 
   reduce (state, action) {

@@ -1,6 +1,6 @@
 import Immutable from 'immutable'
 
-const Answer = Immutable.Record({
+export const Answer = Immutable.Record({
   text: '',
   correct: false
 })

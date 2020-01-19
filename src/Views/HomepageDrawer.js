@@ -50,7 +50,7 @@ class GlobalScore extends React.PureComponent {
     const player = this.props.data[this.props.index]
 
     return (
-      <TableRow style={this.props.style}>
+      <TableRow>
         <TableCell>{this.props.index + 1}</TableCell>
         <TableCell>{player.name}</TableCell>
         <TableCell>{player.score}</TableCell>
@@ -83,6 +83,11 @@ export default function HomepageDrawer (props) {
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">Global Score</DialogTitle>
         </ThemeProvider>
+        <DialogActions>
+          <TextField>
+
+          </TextField>
+        </DialogActions>
         <DialogContent>
           <FixedSizeList
             ref={globalScoreRef}
@@ -98,8 +103,6 @@ export default function HomepageDrawer (props) {
             {GlobalScore}
           </FixedSizeList>
         </DialogContent>
-        <DialogActions>
-        </DialogActions>
       </Dialog>
     </div>
   )
@@ -293,5 +296,16 @@ HomepageDrawer.propTypes = {
   onOpenDrawerItem: PropTypes.func,
   contactUs: PropTypes.instanceOf(Immutable.Record),
   onChangeContactUs: PropTypes.func,
-  onSubmitContactUs: PropTypes.func
+  onSubmitContactUs: PropTypes.func,
+  players: PropTypes.arrayOf(Immutable.Record)
+}
+
+GSTable.propTypes = {
+  style: PropTypes.instanceOf(PropTypes.object).isRequired,
+  children: PropTypes.node
+}
+
+GlobalScore.propTypes = {
+  index: PropTypes.number,
+  data: PropTypes.any
 }

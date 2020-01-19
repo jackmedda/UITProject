@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import PropTypes from 'prop-types'
 import Slide from '@material-ui/core/Slide'
 import Dialog from '@material-ui/core/Dialog'
@@ -24,14 +24,37 @@ import clsx from 'clsx'
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import Immutable from 'immutable'
 import { FixedSizeList } from 'react-window'
-import AutoSizer from 'react-virtualized-auto-sizer'
+import Table from '@material-ui/core/Table'
+import TableHead from '@material-ui/core/TableHead'
+import TableBody from '@material-ui/core/TableBody'
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell'
+
+const GSTable = forwardRef(function GSTable (props, ref) {
+  return (
+    <Table ref={ref} style={props.style}>
+      <TableHead>
+        <TableRow>
+          <TableCell>Position</TableCell>
+          <TableCell>Name</TableCell>
+          <TableCell>Score</TableCell>
+        </TableRow>
+      </TableHead>
+      {props.children}
+    </Table>
+  )
+})
 
 class GlobalScore extends React.PureComponent {
   render () {
+    const player = this.props.data[this.props.index]
+
     return (
-      <div style={this.props.style}>
-        Row {this.props.index + 1}
-      </div>
+      <TableRow style={this.props.style}>
+        <TableCell>{this.props.index + 1}</TableCell>
+        <TableCell>{player.name}</TableCell>
+        <TableCell>{player.score}</TableCell>
+      </TableRow>
     )
   }
 }
@@ -61,24 +84,19 @@ export default function HomepageDrawer (props) {
           <DialogTitle id="alert-dialog-slide-title">Global Score</DialogTitle>
         </ThemeProvider>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Global Score
-          </DialogContentText>
-          <AutoSizer>
-            {({ height, width }) => (
-              <FixedSizeList
-                ref={globalScoreRef}
-                height={height}
-                itemData={props.players}
-                itemCount={1000}
-                itemSize={35}
-                width={width}
-                itemKey={(index, data) => { return data.get('id-' + (index + 1).toString()) }}
-              >
-                <GlobalScore/>
-              </FixedSizeList>
-            )}
-          </AutoSizer>
+          <FixedSizeList
+            ref={globalScoreRef}
+            height={400}
+            itemData={props.players}
+            itemCount={props.players.length}
+            itemSize={35}
+            width={300}
+            itemKey={(index, data) => { return data[index].id }}
+            outerElementType={GSTable}
+            innerElementType={TableBody}
+          >
+            {GlobalScore}
+          </FixedSizeList>
         </DialogContent>
         <DialogActions>
         </DialogActions>
@@ -154,7 +172,7 @@ export default function HomepageDrawer (props) {
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">Contact Us</DialogTitle>
           <DialogContent>
-            <form id="contents_form" action="javascript:0">
+            <form id="contents_form" action={ undefined }>
               <TextField id="contacts_email" autoFocus={true} fullWidth margin="dense"
                 type="email" label="Email" variant="outlined"
                 value={props.contactUs.get('email')}

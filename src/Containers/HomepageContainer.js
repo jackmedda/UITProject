@@ -20,7 +20,11 @@ function getState () {
     difficultySlider: DifficultySliderStore.getState(),
     openDrawerData: DrawerStore.getState(),
     contactUs: ContactUsStore.getState(),
-    players: PlayerStore.getState(),
+    // players will be the array of players ordered by score
+    players: [...PlayerStore.getState().sort((a, b) => {
+      if (a.get('score') < b.get('score')) { return 1 }
+      if (a.get('score') > b.get('score')) { return -1 } else { return 0 }
+    }).values()],
 
     onChangeDifficulty: Actions.changeDifficulty,
     onOpenDrawerItem: Actions.openDrawerItem,

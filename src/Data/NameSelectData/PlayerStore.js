@@ -4,6 +4,7 @@ import PlayerActionTypes from './PlayerActionTypes'
 import Immutable from 'immutable'
 import Player from './Player'
 import Counter from '../Counter'
+import players from '../../players'
 
 class PlayerStore extends ReduceStore {
   constructor () {
@@ -11,7 +12,9 @@ class PlayerStore extends ReduceStore {
   }
 
   getInitialState () {
-    return Immutable.OrderedMap()
+    return Immutable.OrderedMap(players.map(player => (
+      [player[0], Player(player[1])]
+    )))
   }
 
   reduce (state, action) {

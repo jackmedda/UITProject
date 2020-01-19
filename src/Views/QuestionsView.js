@@ -22,16 +22,16 @@ function Question (props) {
   return (
     <div id="questions-block">
       <Paper elevation={3} aria-label="question text" className={classes.question}>
-        {props.questions.first().get('text')}
+        {props.questions.first().text}
       </Paper>
       <Grid className={classes.answers}>
         <ButtonGroup size="large" color="primary" aria-label="answers">
-          {shuffle(props.questions.first().get('answers')).map(answer => (
+          {shuffle(props.questions.first().answers.map(answer => (
             <Button
               key={shortid.generate()}
               onClick={() => {}}
             >{answer.text}</Button>
-          ))}
+          )))}
         </ButtonGroup>
       </Grid>
     </div>

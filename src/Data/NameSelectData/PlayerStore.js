@@ -18,8 +18,8 @@ class PlayerStore extends ReduceStore {
       : []
 
     sessionSPlayers.length
-      ? Counter.setCounter(parseInt(sessionSPlayers[sessionSPlayers.length - 1][0].substr(3)))
-      : Counter.setCounter(parseInt(players[players.length - 1][0].substr(3)))
+      ? Counter.setCounter(parseInt(sessionSPlayers[sessionSPlayers.length - 1][0].substr(3)) + 1)
+      : Counter.setCounter(parseInt(players[players.length - 1][0].substr(3)) + 1)
 
     return Immutable.OrderedMap(sessionSPlayers)
   }

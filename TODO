@@ -2,9 +2,11 @@ Task TO DO:
 
 [JackMedda]
 Homepage:
-   - Ottenere i dati dal form nel list item del drawer 'Contact us' tramite l'attributo 'name'
-     Mettere una dimensione più grande per i text field dello stesso list item
-   - Creare i dialog ad-hoc per gli altri list item
+   -
+NameSelect:
+   - Fare il check che il nome sia unico nessuno si chiami allo stesso modo, e il controllo che il bottone
+     "I/We 're ready" possa essere premuto solo se i nomi sono validi
+Questions:
    - #BIGGER_WORK: finire la terza view delle domande e risposte
             le Questions sono un set così che siano tutte diverse:
             > il campo skipped permette di non dare le stesse domande all'utente (una volta date tutte si setta a false)

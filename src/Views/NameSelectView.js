@@ -35,7 +35,7 @@ function Main (props) {
             onSubmitName={props.onSubmitName}
           />
         ))}
-        <Fab color="primary" aria-label="add" onClick={props.onNewPlayer}>
+        <Fab color="primary" aria-label="add" onClick={ () => { props.onNewPlayer() }}>
           <AddIcon />
         </Fab>
       </Grid>
@@ -65,7 +65,7 @@ function Player (props) {
         />
         <CardActions>
           <form className={classes.root} noValidate autoComplete="off">
-            <TextField id="standard-basic" label="Standard" onBlur={onSubmitName}/>
+            <TextField id={'standard-basic-' + props.player.id} label="Standard" onBlur={onSubmitName}/>
           </form>
         </CardActions>
       </Card>
@@ -116,7 +116,7 @@ Footer.propTypes = {
 }
 
 Player.propTypes = {
-  player: PropTypes.instanceOf(Immutable.Record),
+  player: PropTypes.object,
   onSubmitName: PropTypes.func
 }
 

@@ -15,7 +15,8 @@ function getState () {
 
     onNewPlayer: Actions.newPlayer,
     onSubmitName: Actions.submitName,
-    onUpdateScore: Actions.updateScore
+    onUpdateScore: Actions.updateScore,
+    onCheckName: Actions.nameIsValid
   }
 }
 

@@ -20,6 +20,12 @@ const Actions = {
       id: id,
       score: score
     })
+  },
+  nameIsValid (name) {
+    TwoAnswerDispatcher.dispatch({
+      type: PlayerActionTypes.CHECK_NAME,
+      name: name
+    })
   }
 }
 

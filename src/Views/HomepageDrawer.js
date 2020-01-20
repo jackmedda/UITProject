@@ -29,6 +29,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableBody from '@material-ui/core/TableBody'
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell'
+import players from '../players'
 
 const GSTable = forwardRef(function GSTable (props, ref) {
   return (
@@ -66,7 +67,11 @@ export default function HomepageDrawer (props) {
     return <Slide direction="up" ref={ref} {...props} />
   })
 
-  const globalScoreRef = React.createRef()
+  const _players = players.map(player => player[1]).sort((a, b) => {
+    if (a.score < b.score) { return 1 }
+    if (a.score > b.score) { return -1 }
+    return 0
+  })
 
   // Global score drawer item
   const globalScore = (
@@ -83,17 +88,11 @@ export default function HomepageDrawer (props) {
         <ThemeProvider theme={theme}>
           <DialogTitle id="alert-dialog-slide-title">Global Score</DialogTitle>
         </ThemeProvider>
-        <DialogActions>
-          <TextField>
-
-          </TextField>
-        </DialogActions>
         <DialogContent>
           <FixedSizeList
-            ref={globalScoreRef}
             height={400}
-            itemData={props.players}
-            itemCount={props.players.length}
+            itemData={_players}
+            itemCount={_players.length}
             itemSize={35}
             width={300}
             itemKey={(index, data) => { return data[index].id }}
@@ -301,7 +300,7 @@ HomepageDrawer.propTypes = {
 }
 
 GSTable.propTypes = {
-  style: PropTypes.instanceOf(PropTypes.object).isRequired,
+  style: PropTypes.shape({ subProp: PropTypes.string }).isRequired,
   children: PropTypes.node
 }
 

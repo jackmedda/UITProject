@@ -22,7 +22,9 @@ function getState () {
     onChangeDifficulty: Actions.changeDifficulty,
     onOpenDrawerItem: Actions.openDrawerItem,
     onChangeContactUs: Actions.editContactUs,
-    onSubmitContactUs: Actions.submitContactUs
+    onSubmitContactUs: Actions.submitContactUs,
+    clearPlayers: Actions.clearPlayers,
+    clearNameValidators: Actions.clearNameValidators
   }
 }
 

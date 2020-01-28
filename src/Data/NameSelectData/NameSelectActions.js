@@ -21,10 +21,16 @@ const Actions = {
       score: score
     })
   },
-  nameIsValid (name) {
+  newValidationName () {
     TwoAnswerDispatcher.dispatch({
-      type: PlayerActionTypes.CHECK_NAME,
-      name: name
+      type: PlayerActionTypes.ADD_NAME_VAL
+    })
+  },
+  updateValName (id, error) {
+    TwoAnswerDispatcher.dispatch({
+      type: PlayerActionTypes.UPDATE_NAME_VAL,
+      id: id,
+      error: error
     })
   }
 }

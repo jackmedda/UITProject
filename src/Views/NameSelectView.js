@@ -12,6 +12,8 @@ import AddIcon from '@material-ui/icons/Add'
 import { makeStyles } from '@material-ui/core/styles'
 import { navigate } from 'hookrouter'
 import Immutable from 'immutable'
+import clsx from 'clsx'
+import playersJSON from '../players'
 
 function NameSelectView (props) {
   return (
@@ -32,10 +34,10 @@ function Main (props) {
           <Player
             key={player.id}
             player={player}
-            onSubmitName={props.onSubmitName}
+            {...props}
           />
         ))}
-        <Fab color="primary" aria-label="add" onClick={ () => { props.onNewPlayer() }}>
+        <Fab color="primary" aria-label="add" onClick={ () => { props.onNewPlayer(); props.onNewValName() }}>
           <AddIcon />
         </Fab>
       </Grid>
@@ -44,16 +46,53 @@ function Main (props) {
 }
 
 function Footer (props) {
+  const classes = useStyles()
+  const onClick = () => {
+    if (!props.nameValidators.reduce((acc, curr) => acc.error || curr.error)) {
+      navigate('/game')
+    }
+  }
+
   return (
-    <Button onClick={() => { navigate('/game') }}>
-      {props.players.count() > 1 ? 'We\'re ready!' : 'I\'m ready!'}
+    <Button className={clsx(props.players.size === 0 && classes.hide)} onClick={onClick}>
+      {props.players.size > 1 ? 'We\'re ready!' : 'I\'m ready!'}
     </Button>
   )
 }
 
 function Player (props) {
-  const onSubmitName = (event) => props.onSubmitName(props.player.id, event.target.value)
   const classes = useStyles()
+
+  const onChange = (event) => {
+    props.onSubmitName(props.player.id, event.target.value)
+
+    const _players = props.players.toArray()
+    // In _players is added manually the changed name
+    _players.forEach(element => {
+      if (element[0] === props.player.id) {
+        element[1] = element[1].set('name', event.target.value)
+      }
+    })
+
+    _players.forEach((outerElement, outerIndex) => {
+      let notDistinct = false
+      _players.forEach((innerElement, innerIndex) => {
+        if (outerIndex !== innerIndex) {
+          if (outerElement[1].name !== '' && outerElement[1].name === innerElement[1].name) {
+            props.onUpdateValName('standard-basic-' + outerElement[0], true)
+            notDistinct = true
+          }
+        }
+      })
+      // Called to check if playersJSON contains event.target.value
+      if (!notDistinct) {
+        props.onUpdateValName(
+          'standard-basic-' + outerElement[0],
+          playersJSON.reduce((acc, curr) => acc || curr[1].name === outerElement[1].name.trim(), false)
+        )
+      }
+    })
+  }
 
   return (
     <Grid item key={props.player.id} xs={12} sm={6} md={4}>
@@ -65,7 +104,15 @@ function Player (props) {
         />
         <CardActions>
           <form className={classes.root} noValidate autoComplete="off">
-            <TextField id={'standard-basic-' + props.player.id} label="Standard" onBlur={onSubmitName}/>
+            <TextField
+              id={'standard-basic-' + props.player.id}
+              error={props.nameValidators.get('standard-basic-' + props.player.id).error}
+              defaultValue={props.player.name}
+              label="Game Name"
+              onChange={onChange}
+              aria-describedby="error-helper-text"
+              helperText={props.nameValidators.get('standard-basic-' + props.player.id).helperText}
+            />
           </form>
         </CardActions>
       </Card>
@@ -102,22 +149,30 @@ const useStyles = makeStyles(theme => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6)
+  },
+  hide: {
+    display: 'none'
   }
 }))
 
 Main.propTypes = {
   players: PropTypes.instanceOf(Immutable.OrderedMap),
   onSubmitName: PropTypes.func,
-  onNewPlayer: PropTypes.func
+  onNewPlayer: PropTypes.func,
+  onNewValName: PropTypes.func
 }
 
 Footer.propTypes = {
-  players: PropTypes.instanceOf(Immutable.OrderedMap)
+  players: PropTypes.instanceOf(Immutable.OrderedMap),
+  nameValidators: PropTypes.instanceOf(Immutable.OrderedMap)
 }
 
 Player.propTypes = {
+  players: PropTypes.instanceOf(Immutable.OrderedMap),
   player: PropTypes.object,
-  onSubmitName: PropTypes.func
+  onSubmitName: PropTypes.func,
+  nameValidators: PropTypes.instanceOf(Immutable.OrderedMap),
+  onUpdateValName: PropTypes.func
 }
 
 export default NameSelectView

@@ -178,12 +178,16 @@ export default function HomepageDrawer (props) {
               <TextField id="contacts_email" autoFocus={true} fullWidth margin="dense"
                 type="email" label="Email" variant="outlined"
                 value={props.contactUs.get('email')}
-                onChange={(event) => { props.onChangeContactUs(event.target.value, props.contactUs.get('message')) }}
+                onChange={(event) => {
+                  props.onChangeContactUs(event.target.value, props.contactUs.get('message'))
+                }}
               />
               <TextField id="contacts_message" fullWidth
                 type="text" label="Message" variant="outlined" multiline={true}
                 value={props.contactUs.get('message')}
-                onChange={(event) => { props.onChangeContactUs(props.contactUs.get('email'), event.target.value) }}
+                onChange={(event) => {
+                  props.onChangeContactUs(props.contactUs.get('email'), event.target.value)
+                }}
               />
             </form>
           </DialogContent>
@@ -249,11 +253,11 @@ export default function HomepageDrawer (props) {
         aria-label="open drawer"
         onClick={() => { props.onOpenDrawerItem('drawer', true) }}
         edge="end"
-        className={clsx(props.openDrawerData.drawer && classes.hide)}
+        className={clsx(props.openDrawerData.get('drawer') && classes.hide)}
       >
         <MenuIcon />
       </IconButton>
-      <Drawer anchor="right" open={props.openDrawerData.drawer} onClose={() => { props.onOpenDrawerItem('drawer', false) }}>
+      <Drawer anchor="right" open={props.openDrawerData.get('drawer')} onClose={() => { props.onOpenDrawerItem('drawer', false) }}>
         {sideList}
       </Drawer>
     </div>

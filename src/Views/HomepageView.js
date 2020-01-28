@@ -18,7 +18,7 @@ function HomepageView (props) {
   return (
     <Container>
       <Header {...props}/>
-      <Main />
+      <Main {...props}/>
       <DifficultySlider {...props}/>
       <Footer />
     </Container>
@@ -34,10 +34,15 @@ function Header (props) {
   )
 }
 
-function Main () {
+function Main (props) {
   return (
     <div id="main">
-      <Button variant="contained" color="primary" onClick={ () => { navigate('/nameSelect') } }>
+      <Button variant="contained" color="primary" onClick={ () => {
+        props.clearPlayers()
+        props.clearNameValidators()
+        sessionStorage.removeItem('Players')
+        navigate('/nameSelect')
+      }}>
         Start!
       </Button>
     </div>
@@ -83,6 +88,11 @@ const useStyles = makeStyles(theme => ({
 DifficultySlider.propTypes = {
   difficultySlider: PropTypes.oneOf(['EASY', 'NORMAL', 'HARD']),
   onChangeDifficulty: PropTypes.func
+}
+
+Main.propTypes = {
+  clearPlayers: PropTypes.func,
+  clearNameValidators: PropTypes.func
 }
 
 export default HomepageView

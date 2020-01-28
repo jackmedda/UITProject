@@ -1,22 +1,26 @@
 import { Container } from 'flux/utils'
 import NameSelectView from '../Views/NameSelectView'
 import PlayerStore from '../Data/NameSelectData/PlayerStore'
+import ValidationNamesStore from '../Data/NameSelectData/ValidationNamesStore'
 import Actions from '../Data/NameSelectData/NameSelectActions'
 
 function getStores () {
   return [
-    PlayerStore
+    PlayerStore,
+    ValidationNamesStore
   ]
 }
 
 function getState () {
   return {
     players: PlayerStore.getState(),
+    nameValidators: ValidationNamesStore.getState(),
 
     onNewPlayer: Actions.newPlayer,
     onSubmitName: Actions.submitName,
     onUpdateScore: Actions.updateScore,
-    onCheckName: Actions.nameIsValid
+    onNewValName: Actions.newValidationName,
+    onUpdateValName: Actions.updateValName
   }
 }
 
